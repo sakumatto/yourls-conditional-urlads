@@ -10,15 +10,17 @@ Author URI: https://herocc.com/
 
 if( !defined( 'YOURLS_ABSPATH' ) ) die();
 
-define( 'TRIGGERS', array('a/', 'f/', 'o/') ); // Add any possible trigger to use here
+define( 'TRIGGERS', array('a/', 'f/', 'o/', 'w/') ); // Add any possible trigger to use here
 
 define( 'ADFLY_ID', '2777408' ); // Replace this with your Adfly ID
 define( 'ADFOCUS_ID', '287608' ); // Replace this with your Adfoc.us ID
 define( 'OUO_ID', '0IqYvHOo' ); // You get the drill
+define( 'WAYBACKMACHINE_ID', '0000' ); // You get the drill
 
 define( 'ADFLY_DOMAIN', 'https://adf.ly' ); // If you have a custom Adfly domain, replace this with it
 define( 'ADFOCUS_DOMAIN', 'https://adfoc.us' ); // Same for this
 define( 'OUO_DOMAIN', 'https://ouo.io' ); 
+define( 'WAYBACKMACHINE_DOMAIN', 'https://xit.fi/waybackmachine' ); 
 
 yourls_add_action( 'loader_failed', 'check_for_redirect' ); // On url fail, check here
 function check_for_redirect( $args ) {
@@ -39,6 +41,8 @@ function redirect_to_advert( $url, $code ) {
       return ADFOCUS_DOMAIN . '/serve/sitelinks/?id=' . ADFOCUS_ID . '&url=' . $url;
     } else if ( redirectService == 'a' ) { // Adfly
       return ADFLY_DOMAIN . '/' . ADFLY_ID . '/' . $url;
+    } else if ( redirectService == 'w' ) { // Adfly
+      return WAYBACKMACHINE_DOMAIN . '/' . WAYBACKMACHINE_ID . '/' . $url; 
     } else if ( redirectService == 'o' ) { // OUO.io
       return OUO_DOMAIN . '/qs/' . OUO_ID . '?s=' . $url;
     }
